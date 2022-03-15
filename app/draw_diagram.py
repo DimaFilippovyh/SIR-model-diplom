@@ -1,25 +1,26 @@
 import matplotlib.pyplot as plt
 
 
-def draw_situarion_in_world(lst_country):
+def draw_situation_in_world(lst_country):
     plt.close()
-    labels = [i.name for i in lst_country]
+    labels = [i.get_name_country() for i in lst_country[:3]]
+    labels.extend([i.get_name_country() + "V2" for i in lst_country[:3]])
     width = 0.35
 
     information_of_countries = [i.situation_in_country()[1:4]
-                                for i in lst_country]
-    value_infected = [i[0][-1]*100 for i in information_of_countries]
-    value_none_infected = [i[1][-1]*100 for i in information_of_countries]
-    value_recovered = [i[2][-1]*100 for i in information_of_countries]
-    lst_bottom_none_infected = [(i[0][-1]+i[2][-1])*100
+        for i in lst_country]
+    value_infected = [i[0][-1] * 100 for i in information_of_countries]
+    value_none_infected = [i[1][-1] * 100 for i in information_of_countries]
+    value_recovered = [i[2][-1] * 100 for i in information_of_countries]
+    lst_bottom_none_infected = [(i[0][-1] + i[2][-1]) * 100
                                 for i in information_of_countries]
 
     _, ax = plt.subplots()
 
     ax.bar(labels, value_none_infected, width, bottom=lst_bottom_none_infected,
-           label='None infected', color='blue')
+            label='None infected', color='blue')
     ax.bar(labels, value_infected, width, bottom=value_recovered,
-           label='Infected', color='red')
+            label='Infected', color='red')
     ax.bar(labels, value_recovered, width, label='Recovered', color='green')
 
     ax.set_ylabel('Percentages')
