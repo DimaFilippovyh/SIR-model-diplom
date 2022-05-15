@@ -2,11 +2,10 @@ from constans import length_virus
 
 
 class Country:
-    def __init__(self, name, contacting=0.04, recovered=0.005,
-                /, list_of_contacts_country={}):
+    def __init__(self, name, contacting=0.04, recovered=0.005, /, list_of_contacts_country={}):
         self.__name = name
         self.__infected_people = [0.0 for i in range(length_virus + 1)]
-        self.__none_infected_people = [1 for i in range(length_virus + 1)]
+        self.__none_infected_people = [1.0 for i in range(length_virus + 1)]
         self.__recovered_people = [0.0 for i in range(length_virus + 1)]
         self.__contacting = contacting
         self.__recovered = recovered
@@ -29,6 +28,7 @@ class Country:
 
     def start_viruses(self):
         self.__infected_people[-1] = 0.001
+        self.__none_infected_people[-1] = 1.0 - 0.001
 
     def change_situation(self, lst_param):
         self.__infected_people.append(lst_param[0])
