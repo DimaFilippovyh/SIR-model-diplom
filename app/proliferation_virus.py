@@ -54,7 +54,7 @@ def proliferation_virus_for_one_country(country: Country):
     k_two_wave - коэф. с которым люди заболевают повторно
     """
 
-    k_two_wave = 0.5
+    k_two_wave = 0.1
     """
     при 0.1 побеждается болезнь
     при параметре 0.5 останавливаеться на 66 и 33 процентах
@@ -270,7 +270,7 @@ def proliferation_virus_with_other_county_with_two_wave(country: Country,
     """
     # FIXME:
 
-    k_two_wave = 0.9
+    k_two_wave = 0.7
     """
     при 0.5 переливы
     """
@@ -285,6 +285,8 @@ def proliferation_virus_with_other_county_with_two_wave(country: Country,
         for i in other_names_of_countries]
 
     other_infected_people = [none_infected_people[-1] * i for i in infected_people_from_other_countries]
+
+    print(f'{sum(other_infected_people)=}')
 
     tmp_infected_people = contacting * infected_people[-1] * none_infected_people[-1]
     tmp_recovered_people = recovered * infected_people[-1 - length_virus]

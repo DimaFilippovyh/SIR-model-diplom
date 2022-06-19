@@ -1,3 +1,5 @@
+import time
+
 import matplotlib.pyplot as plt
 from Country import Country
 from constans import NAMES_OF_COUNTRIES
@@ -6,7 +8,7 @@ from constans import NAMES_OF_COUNTRIES
 def draw_situation_in_world(lst_countries, lst_countries_with_contacts):
     plt.close()
     labels = list(NAMES_OF_COUNTRIES)
-    labels.extend([name + "V2" for name in NAMES_OF_COUNTRIES])
+    labels.extend([name + "W2" for name in NAMES_OF_COUNTRIES])
     width = 0.35
 
     general_list = [*lst_countries, *lst_countries_with_contacts]
@@ -28,11 +30,10 @@ def draw_situation_in_world(lst_countries, lst_countries_with_contacts):
     ax.set_title('Status by country')
     ax.legend()
 
-    plt.show()
-
+    # plt.show()
+    return fig
 
 def draw_situation_in_country(country, country_2: Country):
-    plt.close()
     labels = ['Russia', 'Russia with 2 wave']
     width = 0.2
 
@@ -54,8 +55,8 @@ def draw_situation_in_country(country, country_2: Country):
     ax.set_ylabel('Percentages')
     ax.set_title('Status by country')
     ax.legend()
-
-    plt.show()
+    # plt.show()
+    return fig
 
 
 def draw_situation_in_country_bifurcation(results):

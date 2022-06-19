@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 import numpy as np
 from Country import Country
 from proliferation_virus import (
@@ -20,6 +21,7 @@ def change_count_infected_people(lst_countries_with_contacts):
 
 def spread_virus_in_country(country, country_2):
     poll_count = 0
+    plt.ion()
     while True:
         for _ in range(50):
             proliferation_virus_for_one_country_without_two_wave(country)
@@ -28,7 +30,13 @@ def spread_virus_in_country(country, country_2):
         print(f"poll nomber {poll_count}")
         poll_count += 1
 
-        draw_situation_in_country(country, country_2)
+        fig = draw_situation_in_country(country, country_2)
+
+        plt.show()
+        if poll_count == 1:
+            plt.pause(10)
+        plt.pause(0.5)
+        plt.close()
 
 
 def spread_virus_in_bifurcation():
@@ -50,11 +58,13 @@ def spread_virus_in_bifurcation():
 def spread_virus_in_countries(lst_countries, lst_countries_with_contacts):
     infected_people_in_country = change_count_infected_people(lst_countries_with_contacts)
     poll_count = 0
-
+    plt.ion()
     while True:
         for _ in range(50):
             for country in lst_countries:
-                proliferation_virus(country)
+                # proliferation_virus(country)
+                proliferation_virus_for_one_country(country)
+                # proliferation_virus_with_other_county(country, infected_people_in_country)
             print()
             for country in lst_countries_with_contacts:
                 # proliferation_virus_with_other_county(country, infected_people_in_country)
@@ -66,4 +76,12 @@ def spread_virus_in_countries(lst_countries, lst_countries_with_contacts):
         print(f"poll nomber {poll_count}")
         poll_count += 1
 
-        draw_situation_in_world(lst_countries, lst_countries_with_contacts)
+        fig = draw_situation_in_world(lst_countries, lst_countries_with_contacts)
+        plt.show()
+        # if poll_count == 1:
+        #     plt.pause(10)
+        if poll_count < 5:
+            plt.pause(1)
+        else:
+            plt.pause(0.5)
+        plt.close()
